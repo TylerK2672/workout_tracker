@@ -8,5 +8,48 @@
 </head>
 <body>
     <p>Workout Tracker</p>
+
+    <form>
+        <div style="padding:5px">
+        <label for="exercise" style="display:inline-block; width:60px">Exercise:</label>
+        <select id="exercise" name="exercise" style="width: 183px;" placeholder="Enter exercise name here">
+            <option value="none" selected disabled hidden>Select a workout</option>
+            <option value="Bench Press">Bench Press</option>
+            <option value="Squat">Squat</option>
+            <option value="Deadlift">Deadlift</option>
+        </select>
+
+        </div>
+
+        <div style="padding:5px">
+        <label for="weight" style="display:inline-block; width:60px">Weight:</label>
+        <input 
+            type='number'
+            min="0"
+            step=".1"
+            id="weight"
+            name="weight"
+            style="width: 175px;"
+            placeholder='Enter weight lifted here'/>
+        </div>
+
+        <div style="padding:5px">
+        <label for="reps" style="display:inline-block; width:60px">Reps:</label>
+        <input 
+            type='number'
+            id="reps"
+            name="reps"
+            style="width: 175px;"
+            placeholder='Enter # of reps here'/>
+        </div>
+
+        <button>Commit Exercise</button>
+    </form>
+
+    <br><br>
+
+    <form action="/addExercise" method="GET">
+        <button type="submit">Go to add workout page</button>
+    </form>
 </body>
 </html>
