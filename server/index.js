@@ -14,6 +14,11 @@ app.get('/', (req, res) =>
     res.sendFile(path.join(__dirname, '../public/landing.html'));
 });
 
+app.get('/js', (req, res) =>
+{
+    res.sendFile(path.join(__dirname, '../public/index.js'));
+})
+
 app.get('/addExercise', (req, res) =>
 {
     res.sendFile(path.join(__dirname, '../public/addExercise.html'));

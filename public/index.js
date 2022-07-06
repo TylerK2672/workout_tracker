@@ -13,4 +13,3 @@ function getExercises() {
 }
 
 getExercises();
-alert('hey there');
