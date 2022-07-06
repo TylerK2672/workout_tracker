@@ -1,7 +1,7 @@
 const exerciseSelect = document.getElementById('exercise');
 
 function getExercises() {
-    axios.get('http://localhost:3005/exercises')
+    axios.get('/exercises')
         .then(res => {
             res.data.forEach(exercise => {
                 const option = document.createElement('option')
