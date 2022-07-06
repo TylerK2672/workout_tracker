@@ -11,6 +11,7 @@ app.use(cors());
 
 app.get('/', (req, res) =>
 {
+    console.log('heyo')
     res.sendFile(path.join(__dirname, '../public/landing.html'));
 });
 
