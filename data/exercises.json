@@ -1,0 +1,17 @@
+{
+    "Bench Press":
+    {
+        "primaryMuscle": ["Chest", "Triceps"],
+        "secondaryMuscle": ["Shoulders", "Traps", "Back"]
+    },
+    "Squat":
+    {
+        "primaryMuscle": ["Quads", "Hamstrings", "Glutes"],
+        "secondaryMuscle": ["Calves", "Low Back"]
+    },
+    "Deadlift":
+    {
+        "primaryMuscle": ["Quads", "Low Back", "Glutes", "Trapezius"],
+        "secondaryMuscle": ["Lats", "Upper Back", "Abs", "Hamstrings", "Calves"]
+    }
+}
