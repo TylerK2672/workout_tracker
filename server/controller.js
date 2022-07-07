@@ -14,17 +14,26 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
 
 module.exports = 
 {
-    getWorkouts: (req, res) =>
+    getExercises: (req, res) =>
     {
         sequelize.query(`
             SELECT * FROM exercises
         `).then(dbRes => res.status(200).send(dbRes[0]))
     },
 
-    getExercises: (req, res) =>
+    getWorkouts: (req, res) =>
     {
         sequelize.query(`
             SELECT * FROM workouts
+        `).then(dbRes => res.status(200).send(dbRes[0]))
+    },
+
+    postWorkout: (req, res) =>
+    {
+        let { exercise_name, weight, reps, set_num, date } = req.body
+        sequelize.query(`
+            INSERT INTO workouts(exercise_name, weight, reps, set_num, day)
+            VALUES ('${exercise_name}','${weight}','${reps}', '${set_num}', '${date}')
         `).then(dbRes => res.status(200).send(dbRes[0]))
     }
 }

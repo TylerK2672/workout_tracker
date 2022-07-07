@@ -26,7 +26,7 @@
 <body>
     <p>Workout Tracker</p>
 
-    <form>
+    <form id="workoutForm">
         <div style="padding:5px">
         <label for="exercise" style="display:inline-block; width:60px">Exercise:</label>
         <select id="exercise" style="width: 183px;" placeholder="Enter exercise name here">
@@ -40,7 +40,7 @@
         <input 
             type='number'
             min="0"
-            step=".1"
+            step=".01"
             id="weight"
             style="width: 175px;"
             placeholder='Enter weight lifted here'/>
@@ -50,32 +50,39 @@
         <label for="reps" style="display:inline-block; width:60px">Reps:</label>
         <input 
             type='number'
+            min="0"
+            step=".1"
             id="reps"
             style="width: 175px;"
             placeholder='Enter # of reps here'/>
         </div>
 
-        <button>Commit Exercise</button>
+        <div style="padding:5px">
+            <label for="set_num" style="display:inline-block; width:60px">Set #:</label>
+            <input 
+                type='number'
+                min="0"
+                step="1"
+                id="set_num"
+                style="width: 175px;"
+                placeholder='Enter set # here'/>
+        </div>
+        
+        <br>
+
+        <button id="commitBtn">Commit Workout</button>
     </form>
 
     <br><br>
 
     <form action="/addExercise" method="GET">
-        <button type="submit">Go to add workout page</button>
+        <button type="submit">Add an Exercise</button>
     </form>
 
     <br><br>
 
     <div>
-        <table id="workoutsTable" style="width: 80%;" align="center">
-            <thead>
-                <th>Exercise</th>
-                <th>Weight</th>
-                <th>Reps</th>
-                <th>Set #</th>
-                <th>Day</th>
-            </thead>
-        </table>
+        <table id="workoutsTable" style="width: 80%;" align="center"></table>
     </div>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
