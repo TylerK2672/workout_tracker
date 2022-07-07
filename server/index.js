@@ -4,7 +4,7 @@ const path = require('path');
 const app = express();
 const cors = require('cors');
 const SERVER_PORT = process.env.PORT || 3005;
-const { getWorkouts } = require('./controller.js')
+const { getWorkouts, getExercises } = require('./controller.js')
 
 app.use(express.json());
 app.use(cors());
@@ -17,14 +17,15 @@ app.get('/', (req, res) =>
 app.get('/js', (req, res) =>
 {
     res.sendFile(path.join(__dirname, '../public/index.js'));
-})
+});
 
 app.get('/addExercise', (req, res) =>
 {
     res.sendFile(path.join(__dirname, '../public/addExercise.html'));
 });
 
-app.get('/exercises', getWorkouts)
+app.get('/exercises', getWorkouts);
+app.get('/workouts', getExercises);
 
 app.listen(SERVER_PORT, () =>
 {

@@ -19,5 +19,12 @@ module.exports =
         sequelize.query(`
             SELECT * FROM exercises
         `).then(dbRes => res.status(200).send(dbRes[0]))
+    },
+
+    getExercises: (req, res) =>
+    {
+        sequelize.query(`
+            SELECT * FROM workouts
+        `).then(dbRes => res.status(200).send(dbRes[0]))
     }
 }
