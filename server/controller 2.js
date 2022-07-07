@@ -17,7 +17,7 @@ module.exports =
     getWorkouts: (req, res) =>
     {
         sequelize.query(`
-            SELECT * FROM exercises
+            DELETE * FROM exercises
         `).then(dbRes => res.status(200).send(dbRes[0]))
     }
 }
