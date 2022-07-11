@@ -7,6 +7,56 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Add Exercise</h1>
+    <p>Add Exercise</p>
+
+    <form id="workoutForm">
+        <div style="padding:5px">
+        <label for="exercise_name" style="display:inline-block;">Exercise Name:</label>
+        <input id="exercise_name" style="width: 175px;" placeholder="Enter exercise name here"/>
+
+        </div>
+
+        <div style="padding:5px">
+        <label for="main_muscles" style="display:inline-block;">Main Muscles Worked</label><br>
+        <input type='checkbox' id="main_muscles" name="main_muscles" value="Chest" style="width: 20px;">Chest
+        <input type='checkbox' id="main_muscles" name="main_muscles" value="Upper Back" style="width: 20px;">Upper Back
+        <input type='checkbox' id="main_muscles" name="main_muscles" value="Low Back" style="width: 20px;">Low Back
+        <br>
+        <input type='checkbox' id="main_muscles" name="main_muscles" value="Triceps" style="width: 20px;">Triceps
+        <input type='checkbox' id="main_muscles" name="main_muscles" value="Biceps" style="width: 20px;">Biceps
+        <input type='checkbox' id="main_muscles" name="main_muscles" value="Shoulders" style="width: 20px;">Shoulders
+        <br>
+        <input type='checkbox' id="main_muscles" name="main_muscles" value="Hamstrings" style="width: 20px;">Hamstrings
+        <input type='checkbox' id="main_muscles" name="main_muscles" value="Quads" style="width: 20px;">Quads
+        <input type='checkbox' id="main_muscles" name="main_muscles" value="Calves" style="width: 20px;">Calves
+        <br>
+        <input type='checkbox' id="main_muscles" name="main_muscles" value="Abs" style="width: 20px;">Abs
+        <input type='checkbox' id="main_muscles" name="main_muscles" value="Traps" style="width: 20px;">Traps
+        <input type='checkbox' id="main_muscles" name="main_muscles" value="Lats" style="width: 20px;">Lats
+        </div>
+        
+        <div style="padding:5px">
+        <label for="secondary_muscles" style="display:inline-block;">Secondary Muscles Worked</label><br>
+        <input type='checkbox' id="secondary_muscles" name="secondary_muscles" value="Chest" style="width: 20px;">Chest
+        <input type='checkbox' id="secondary_muscles" name="secondary_muscles" value="Upper Back" style="width: 20px;">Upper Back
+        <input type='checkbox' id="secondary_muscles" name="secondary_muscles" value="Low Back" style="width: 20px;">Low Back
+        <br>
+        <input type='checkbox' id="secondary_muscles" name="secondary_muscles" value="Triceps" style="width: 20px;">Triceps
+        <input type='checkbox' id="secondary_muscles" name="secondary_muscles" value="Biceps" style="width: 20px;">Biceps
+        <input type='checkbox' id="secondary_muscles" name="secondary_muscles" value="Shoulders" style="width: 20px;">Shoulders
+        <br>
+        <input type='checkbox' id="secondary_muscles" name="secondary_muscles" value="Hamstrings" style="width: 20px;">Hamstrings
+        <input type='checkbox' id="secondary_muscles" name="secondary_muscles" value="Quads" style="width: 20px;">Quads
+        <input type='checkbox' id="secondary_muscles" name="secondary_muscles" value="Calves" style="width: 20px;">Calves
+        <br>
+        <input type='checkbox' id="secondary_muscles" name="secondary_muscles" value="Abs" style="width: 20px;">Abs
+        <input type='checkbox' id="secondary_muscles" name="secondary_muscles" value="Traps" style="width: 20px;">Traps
+        <input type='checkbox' id="secondary_muscles" name="secondary_muscles" value="Lats" style="width: 20px;">Lats
+        </div>
+
+        <br>
+
+        <button id="commitBtn">Add Exercise</button>
+    </form>
 </body>
 </html>
