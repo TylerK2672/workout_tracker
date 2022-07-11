@@ -1,5 +1,6 @@
 create table exercises (
-  exercise_name varchar(50) not null primary key,
+  exercise_id serial primary key,
+  exercise_name varchar(50),
   main_muscles varchar(100),
   secondary_muscles varchar(100)
 );

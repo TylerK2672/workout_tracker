@@ -42,5 +42,21 @@ module.exports =
         sequelize.query(`
             DELETE FROM workouts WHERE workout_id = ${req.params.id}
         `).then(dbRes => res.status(200).send(dbRes[0]))
+    },
+
+    postExercise: (req, res) =>
+    {
+        let { exercise_name, primary_muscles, secondary_muscles } = req.body
+        sequelize.query(`
+            INSERT INTO exercises(exercise_name, main_muscles, secondary_muscles)
+            VALUES ('${exercise_name}', '${primary_muscles}', '${secondary_muscles}')
+        `)
+    },
+
+    deleteExercise: (req, res) =>
+    {
+        sequelize.query(`
+            DELETE FROM exercises WHERE exercise_id = ${req.params.id}
+        `).then(dbRes => res.status(200).send(dbRes[0]))
     }
 }

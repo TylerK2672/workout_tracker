@@ -1,6 +1,6 @@
 const exerciseSelect = document.getElementById('exercise');
 const commitBtn = document.getElementById('commitBtn');
-const exerciseForm = document.getElementById('workoutForm');
+const workoutForm = document.getElementById('workoutForm');
 const exercise = document.getElementById('exercise');
 const weight = document.getElementById('weight');
 const reps = document.getElementById('reps');
@@ -29,7 +29,7 @@ function getExercises()
 
 function getWorkouts()
 {
-    table.innerHTML = '<thead><th>Exercise</th><th>Weight</th><th>Reps</th><th>Set #</th><th>Date</th>';
+    table.innerHTML = '<thead><th>Exercise</th><th>Weight</th><th>Reps</th><th>Set #</th><th>Date</th></thead>';
     axios.get('/workouts')
     .then(res =>
     {
@@ -42,8 +42,6 @@ function getWorkouts()
             const reps = document.createElement('td');
             const set_num = document.createElement('td');
             const day = document.createElement('td');
-            const editTd = document.createElement('td');
-            const deleteTd = document.createElement('td');
             const editBtn = document.createElement('input');
             const deleteBtn = document.createElement('input');
 
@@ -53,8 +51,6 @@ function getWorkouts()
             reps.classList.add('workouts');
             set_num.classList.add('workouts');
             day.classList.add('workouts');
-            editTd.classList.add('workouts');
-            deleteTd.classList.add('workouts');
 
             //set buttons
             editBtn.type = 'button';
@@ -68,10 +64,6 @@ function getWorkouts()
             reps.textContent = workouts.reps;
             set_num.textContent = workouts.set_num;
             day.textContent = workouts.day;
-
-            //append buttons to edit/delete
-            editTd.appendChild(editBtn);
-            deleteTd.appendChild(deleteBtn);
 
             //add functionality to buttons
             editBtn.addEventListener('click', editWorkout);
@@ -115,7 +107,8 @@ function submitWorkout(e)
 
     const d = new Date();
     d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0];
-    let body = {
+    let body = 
+    {
         exercise_name: exercise.value, 
         weight: weight.value, 
         reps: reps.value,
@@ -146,4 +139,4 @@ function editWorkout()
 // sortWorkouts();
 getExercises();
 getWorkouts();
-exerciseForm.addEventListener('submit', submitWorkout)
+workoutForm.addEventListener('submit', submitWorkout);
