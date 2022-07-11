@@ -75,7 +75,7 @@ function getWorkouts()
 
             //add functionality to buttons
             editBtn.addEventListener('click', editWorkout);
-            deleteBtn.addEventListener('click', deleteWorkout(`${workouts['workout_id']}`));
+            deleteBtn.addEventListener('click', () => deleteWorkout(`${workouts['workout_id']}`));
 
             //append onto row
             row.appendChild(exercise_name);
