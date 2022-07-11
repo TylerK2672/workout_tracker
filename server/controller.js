@@ -35,5 +35,12 @@ module.exports =
             INSERT INTO workouts(exercise_name, weight, reps, set_num, day)
             VALUES ('${exercise_name}','${weight}','${reps}', '${set_num}', '${date}')
         `).then(dbRes => res.status(200).send(dbRes[0]))
+    },
+
+    deleteWorkout: (req, res) =>
+    {
+        sequelize.query(`
+            DELETE FROM workouts WHERE workout_id = ${req.params.id}
+        `).then(dbRes => res.status(200).send(dbRes[0]))
     }
 }
