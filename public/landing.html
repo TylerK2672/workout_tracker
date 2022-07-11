@@ -26,58 +26,60 @@
 <body>
     <p>Workout Tracker</p>
 
-    <form id="workoutForm">
-        <div style="padding:5px">
-        <label for="exercise" style="display:inline-block; width:60px">Exercise:</label>
-        <select id="exercise" style="width: 183px;" placeholder="Enter exercise name here">
-            <option value="none" selected disabled hidden>Select an exercise</option>
-        </select>
+    <div style="display:inline-block; width:260px">
+        <form id="workoutForm">
+            <div style="padding:5px">
+            <label for="exercise" style="display:inline-block; width:60px">Exercise:</label>
+            <select id="exercise" style="width: 183px;" placeholder="Enter exercise name here">
+                <option value="none" selected disabled hidden>Select an exercise</option>
+            </select>
 
-        </div>
+            </div>
 
-        <div style="padding:5px">
-        <label for="weight" style="display:inline-block; width:60px">Weight:</label>
-        <input 
-            type='number'
-            min="0"
-            step=".01"
-            id="weight"
-            style="width: 175px;"
-            placeholder='Enter weight lifted here'/>
-        </div>
-
-        <div style="padding:5px">
-        <label for="reps" style="display:inline-block; width:60px">Reps:</label>
-        <input 
-            type='number'
-            min="0"
-            step=".5"
-            id="reps"
-            style="width: 175px;"
-            placeholder='Enter # of reps here'/>
-        </div>
-
-        <div style="padding:5px">
-            <label for="set_num" style="display:inline-block; width:60px">Set #:</label>
+            <div style="padding:5px">
+            <label for="weight" style="display:inline-block; width:60px">Weight:</label>
             <input 
                 type='number'
                 min="0"
-                step="1"
-                id="set_num"
+                step=".01"
+                id="weight"
                 style="width: 175px;"
-                placeholder='Enter set # here'/>
-        </div>
-        
-        <br>
+                placeholder='Enter weight lifted here'/>
+            </div>
 
-        <button id="commitBtn">Commit Workout</button>
-    </form>
+            <div style="padding:5px">
+            <label for="reps" style="display:inline-block; width:60px">Reps:</label>
+            <input 
+                type='number'
+                min="0"
+                step=".5"
+                id="reps"
+                style="width: 175px;"
+                placeholder='Enter # of reps here'/>
+            </div>
 
-    <br><br>
+            <div style="padding:5px">
+                <label for="set_num" style="display:inline-block; width:60px">Set #:</label>
+                <input 
+                    type='number'
+                    min="0"
+                    step="1"
+                    id="set_num"
+                    style="width: 175px;"
+                    placeholder='Enter set # here'/>
+            </div>
+            
+            <br>
 
-    <form action="/addExercise" method="GET">
-        <button type="submit">Add an Exercise</button>
-    </form>
+            <button id="commitBtn">Commit Workout</button>
+        </form>
+    </div>
+
+    <div style="display:inline; position:relative; bottom:136px">
+        <form action="/addExercise" method="GET" style="display:inline;">
+            <button type="submit">Add an Exercise</button>
+        </form>
+    </div>
 
     <br><br>
 
