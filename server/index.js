@@ -4,7 +4,7 @@ const path = require('path');
 const app = express();
 const cors = require('cors');
 const SERVER_PORT = process.env.PORT || 3005;
-const { getExercises, getWorkouts, postWorkout, deleteWorkout, postExercise, deleteExercise } = require('./controller.js')
+const { getExercises, getWorkouts, postWorkout, deleteWorkout, postExercise, deleteExercise, getWorkoutById, updateWorkout } = require('./controller.js')
 
 app.use(express.json());
 app.use(cors());
@@ -36,6 +36,8 @@ app.delete('/exercises/:id', deleteExercise);
 
 //workouts
 app.get('/workouts', getWorkouts);
+app.get('/workouts/:id', getWorkoutById);
+app.put('/workouts', updateWorkout);
 app.post('/workouts', postWorkout);
 app.delete('/workouts/:id', deleteWorkout);
 

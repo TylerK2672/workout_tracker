@@ -6,6 +6,11 @@ const weight = document.getElementById('weight');
 const reps = document.getElementById('reps');
 const set_num = document.getElementById('set_num');
 const table = document.getElementById('workoutsTable');
+const editTable = document.getElementById('editTable');
+const postEditBtnDiv = document.getElementById('postEditBtnDiv');
+const postEditBtn = document.createElement('input');
+postEditBtn.type = "button";
+postEditBtn.value = "Post Changes"
 
 function sortExercises()
 {
@@ -29,6 +34,7 @@ function getExercises()
 
 function getWorkouts()
 {
+    table.innerHTML = '';
     table.innerHTML = '<thead><th>Exercise</th><th>Weight</th><th>Reps</th><th>Set #</th><th>Date</th></thead>';
     axios.get('/workouts')
     .then(res =>
@@ -66,7 +72,7 @@ function getWorkouts()
             day.textContent = workouts.day;
 
             //add functionality to buttons
-            editBtn.addEventListener('click', editWorkout);
+            editBtn.addEventListener('click', () => editWorkout(`${workouts['workout_id']}`));
             deleteBtn.addEventListener('click', () => deleteWorkout(`${workouts['workout_id']}`));
 
             //append onto row
@@ -131,9 +137,132 @@ function deleteWorkout(workout_id)
     axios.delete(`/workouts/${workout_id}`).then(() => getWorkouts())
 }
 
-function editWorkout()
+function editWorkout(workout_id)
 {
-    alert('edited');
+    editTable.innerHTML = '<thead><th>Exercise</th><th>Weight</th><th>Reps</th><th>Set #</th><th>Date</th></thead>';
+    axios.get(`/workouts/${workout_id}`)
+    .then(res =>
+    {
+        //showing what you're editing
+        // res.data.forEach(workout =>
+        // {
+        //     const row = document.createElement('tr');
+        //     //create td's
+        //     const exercise_name = document.createElement('td');
+        //     const weight = document.createElement('td');
+        //     const reps = document.createElement('td');
+        //     const set_num = document.createElement('td');
+        //     const day = document.createElement('td');
+
+        //     //add classname
+        //     exercise_name.classList.add('workouts');
+        //     weight.classList.add('workouts');
+        //     reps.classList.add('workouts');
+        //     set_num.classList.add('workouts');
+        //     day.classList.add('workouts');
+
+        //     //set text content
+        //     exercise_name.textContent = workout.exercise_name;
+        //     weight.textContent = workout.weight;
+        //     reps.textContent = workout.reps;
+        //     set_num.textContent = workout.set_num;
+        //     day.textContent = workout.day;
+
+        //     //append onto row
+        //     row.appendChild(exercise_name);
+        //     row.appendChild(weight);
+        //     row.appendChild(reps);
+        //     row.appendChild(set_num);
+        //     row.appendChild(day);
+
+        //     editTable.appendChild(row);
+        // })
+
+        //editing tables
+        res.data.forEach(workout =>
+        {
+            //create variables
+            const row = document.createElement('tr');
+
+            //create td's
+            const exercise_name = document.createElement('td');
+            const weight = document.createElement('td');
+            const reps = document.createElement('td');
+            const set_num = document.createElement('td');
+            const day = document.createElement('td');
+
+            //add classname
+            exercise_name.classList.add('workouts');
+            weight.classList.add('workouts');
+            reps.classList.add('workouts');
+            set_num.classList.add('workouts');
+            day.classList.add('workouts');
+
+            //create inputs
+            const input_exercise_name = document.createElement('input');
+            input_exercise_name.type = 'text';
+            input_exercise_name.value = workout.exercise_name;
+            const input_weight = document.createElement('input');
+            input_weight.type = 'number';
+            input_weight.value = workout.weight;
+            const input_reps = document.createElement('input');
+            input_reps.type = 'number';
+            input_reps.value = workout.reps
+            const input_set_num = document.createElement('input');
+            input_set_num.type = 'number';
+            input_set_num.value = workout.set_num
+            const input_day = document.createElement('input');
+            input_day.type = 'date';
+            input_day.value = workout.day
+
+            //append to td's
+            exercise_name.appendChild(input_exercise_name);
+            weight.appendChild(input_weight);
+            reps.appendChild(input_reps);
+            set_num.appendChild(input_set_num);
+            day.appendChild(input_day);
+
+            //add id's
+            input_exercise_name.setAttribute('id', 'editedName');
+            input_weight.setAttribute('id', 'editedWeight');
+            input_reps.setAttribute('id', 'editedReps');
+            input_set_num.setAttribute('id', 'editedSetNum');
+            input_day.setAttribute('id', 'editedDay');
+
+
+            //append onto row
+            row.appendChild(exercise_name);
+            row.appendChild(weight);
+            row.appendChild(reps);
+            row.appendChild(set_num);
+            row.appendChild(day);
+
+            editTable.appendChild(row);
+
+            postEditBtnDiv.appendChild(postEditBtn)
+            postEditBtn.addEventListener('click', () => updateWorkout(`${workout['workout_id']}`));
+        })
+    })
+}
+
+function updateWorkout(workout_id)
+{
+    let body = 
+    {
+        id: workout_id,
+        exercise_name: document.getElementById('editedName').value,
+        weight: document.getElementById('editedWeight').value, 
+        reps: document.getElementById('editedReps').value,
+        set_num: document.getElementById('editedSetNum').value,
+        date: document.getElementById('editedDay').value
+    }
+    axios.put('/workouts', body)
+    .then(res =>
+    {
+        editTable.innerHTML = '';
+        postEditBtnDiv.innerHTML = '';
+    })
+    location.reload();
 }
 
 // sortWorkouts();

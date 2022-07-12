@@ -58,5 +58,21 @@ module.exports =
         sequelize.query(`
             DELETE FROM exercises WHERE exercise_id = ${req.params.id}
         `).then(dbRes => res.status(200).send(dbRes[0]))
+    },
+
+    getWorkoutById: (req, res) =>
+    {
+        sequelize.query(`
+            SELECT * FROM workouts WHERE workout_id = ${req.params.id}
+        `).then(dbRes => res.status(200).send(dbRes[0]))
+    },
+
+    updateWorkout: (req, res) =>
+    {
+        sequelize.query(`
+            UPDATE workouts
+            SET exercise_name = '${req.body.exercise_name}', weight = ${req.body.weight}, reps = ${req.body.reps}, set_num = ${req.body.set_num}, day = '${req.body.date}'
+            WHERE workout_id = ${req.body.id}
+        `).then(dbRes => res.status(200).send(dbRes[0]))
     }
 }
