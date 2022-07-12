@@ -74,5 +74,21 @@ module.exports =
             SET exercise_name = '${req.body.exercise_name}', weight = ${req.body.weight}, reps = ${req.body.reps}, set_num = ${req.body.set_num}, day = '${req.body.date}'
             WHERE workout_id = ${req.body.id}
         `).then(dbRes => res.status(200).send(dbRes[0]))
+    },
+
+    getExerciseById: (req, res) =>
+    {
+        sequelize.query(`
+            SELECT * FROM exercises WHERE exercise_id = ${req.params.id}
+        `).then(dbRes => res.status(200).send(dbRes[0]))
+    },
+
+    updateExercise: (req, res) =>
+    {
+        sequelize.query(`
+            UPDATE exercises
+            SET exercise_name = '${req.body.exercise_name}', main_muscles = '${req.body.main_muscles}', secondary_muscles = '${req.body.secondary_muscles}'
+            WHERE exercise_id = ${req.body.id}
+        `).then(dbRes => res.status(200).send(dbRes[0]))
     }
 }

@@ -5,7 +5,12 @@ const sBoxes = document.querySelectorAll('[name="secondary_muscles"')
 //other variables
 const addExerciseForm = document.getElementById('addExerciseForm');
 const exercise_name = document.getElementById('exercise_name');
-const table = document.getElementById('exercisesTable')
+const table = document.getElementById('exercisesTable');
+const editTable = document.getElementById('editTable');
+const postEditBtnDiv = document.getElementById('postEditBtnDiv');
+const postEditBtn = document.createElement('input');
+postEditBtn.type = "button";
+postEditBtn.value = "Post Changes"
 
 function getExercises()
 {
@@ -40,11 +45,8 @@ function getExercises()
             secondary_muscles.textContent = exercise.secondary_muscles;
 
             //add functionality to buttons
-            editBtn.addEventListener('click', editExercise);
-            deleteBtn.addEventListener('click', () => 
-            {
-                deleteExercise(`${exercise['exercise_id']}`)
-            }
+            editBtn.addEventListener('click', () => editExercise(`${exercise['exercise_id']}`));
+            deleteBtn.addEventListener('click', () => deleteExercise(`${exercise['exercise_id']}`)
             );
 
             //append
@@ -132,9 +134,78 @@ function deleteExercise(exercise_id)
     axios.delete(`/exercises/${exercise_id}`).then(() => getExercises())
 }
 
-function editExercise()
+function editExercise(exercise_id)
 {
-    alert('edited');
+    console.log(`edited ${exercise_id}`)
+    editTable.innerHTML = '<thead><th>Exercise</th><th>Main Muscles</th><th>Secondary Muscles</th></thead>';
+    axios.get(`/exercises/${exercise_id}`)
+    .then(res =>
+    {
+        //editing tables
+        res.data.forEach(exercise =>
+        {
+            //create variables
+            const row = document.createElement('tr');
+
+            //create td's
+            const exercise_name = document.createElement('td');
+            const main_muscles = document.createElement('td');
+            const secondary_muscles = document.createElement('td');
+
+            //add classname
+            exercise_name.classList.add('exercises');
+            main_muscles.classList.add('exercises');
+            secondary_muscles.classList.add('exercises');
+
+            //create inputs
+            const input_exercise_name = document.createElement('input');
+            input_exercise_name.value = exercise.exercise_name
+            const input_main_muscles = document.createElement('input');
+            input_main_muscles.value = exercise.main_muscles;
+            const input_secondary_muscles = document.createElement('input');
+            input_secondary_muscles.value = exercise.secondary_muscles
+
+            //append to td's
+            exercise_name.appendChild(input_exercise_name);
+            main_muscles.appendChild(input_main_muscles);
+            secondary_muscles.appendChild(input_secondary_muscles);
+
+            //add id's
+            input_exercise_name.setAttribute('id', 'editedName');
+            input_main_muscles.setAttribute('id', 'editedMainMuscles');
+            input_secondary_muscles.setAttribute('id', 'editedSecondaryMuscles');
+
+
+            //append onto row
+            row.appendChild(exercise_name);
+            row.appendChild(main_muscles);
+            row.appendChild(secondary_muscles);
+
+            editTable.appendChild(row);
+
+            postEditBtnDiv.appendChild(postEditBtn)
+            postEditBtn.addEventListener('click', () => updateExercise(`${exercise['exercise_id']}`));
+            getExercises(input_exercise_name);
+        })
+    })
+}
+
+function updateExercise(exercise_id)
+{
+    let body = 
+    {
+        id: exercise_id,
+        exercise_name: document.getElementById('editedName').value,
+        main_muscles: document.getElementById('editedMainMuscles').value, 
+        secondary_muscles: document.getElementById('editedSecondaryMuscles').value,
+    }
+    axios.put('/exercises', body)
+    .then(res =>
+    {
+        editTable.innerHTML = '';
+        postEditBtnDiv.innerHTML = '';
+    })
+    location.reload();
 }
 
 getExercises();

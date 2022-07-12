@@ -36,8 +36,8 @@
         <div style="padding:5px">
         <label for="main_muscles" style="display:inline-block;">Main Muscles Worked:</label><br>
         <input type='checkbox' id="pChest" name="main_muscles" value="Chest" style="width: 20px;">Chest
-        <input type='checkbox' id="pUpperBack" name="main_muscles" value="Upper Back" style="width: 20px;">Upper Back
-        <input type='checkbox' id="pLowerBack" name="main_muscles" value="Low Back" style="width: 20px;">Low Back
+        <input type='checkbox' id="pUpperBack" name="main_muscles" value="Back" style="width: 20px;">Back
+        <input type='checkbox' id="pLowerBack" name="main_muscles" value="Glutes" style="width: 20px;">Glutes
         <br>
         <input type='checkbox' id="pTriceps" name="main_muscles" value="Triceps" style="width: 20px;">Triceps
         <input type='checkbox' id="pBiceps" name="main_muscles" value="Biceps" style="width: 20px;">Biceps
@@ -55,8 +55,8 @@
         <div style="padding:5px">
         <label for="secondary_muscles" style="display:inline-block;">Secondary Muscles Worked:</label><br>
         <input type='checkbox' id="sChest" name="secondary_muscles" value="Chest" style="width: 20px;">Chest
-        <input type='checkbox' id="sUpperBack" name="secondary_muscles" value="Upper Back" style="width: 20px;">Upper Back
-        <input type='checkbox' id="sLowBack" name="secondary_muscles" value="Low Back" style="width: 20px;">Low Back
+        <input type='checkbox' id="sUpperBack" name="secondary_muscles" value="Back" style="width: 20px;">Back
+        <input type='checkbox' id="sLowBack" name="secondary_muscles" value="Glutes" style="width: 20px;">Glutes
         <br>
         <input type='checkbox' id="sTriceps" name="secondary_muscles" value="Triceps" style="width: 20px;">Triceps
         <input type='checkbox' id="sBiceps" name="secondary_muscles" value="Biceps" style="width: 20px;">Biceps
@@ -77,6 +77,13 @@
     </form>
 
     <br>
+
+    <div style="padding:8px">
+        <table id="editTable" style="width: 80%;" align="center"></table>
+    </div>
+    <div id="postEditBtnDiv" align="center"></div>
+
+    <br><br>
 
     <div>
         <table id="exercisesTable" style="width: 80%;" align="center"></table>

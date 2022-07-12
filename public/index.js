@@ -17,7 +17,7 @@ function sortExercises()
 
 }
 
-function getExercises() 
+function getExercises(select) 
 {
     axios.get('/exercises')
     .then(res => 
@@ -27,7 +27,7 @@ function getExercises()
             const option = document.createElement('option');
             option.setAttribute('value', exercise['exercise_name']);
             option.textContent = exercise.exercise_name;
-            exerciseSelect.appendChild(option);
+            select.appendChild(option);
         })
     })
 }
@@ -199,9 +199,11 @@ function editWorkout(workout_id)
             day.classList.add('workouts');
 
             //create inputs
-            const input_exercise_name = document.createElement('input');
-            input_exercise_name.type = 'text';
-            input_exercise_name.value = workout.exercise_name;
+            const input_exercise_name = document.createElement('select');
+            const curr_exercise = document.createElement('option');
+            curr_exercise.textContent = workout.exercise_name;
+            curr_exercise.value = workout.exercise_name;
+            input_exercise_name.appendChild(curr_exercise);
             const input_weight = document.createElement('input');
             input_weight.type = 'number';
             input_weight.value = workout.weight;
@@ -241,6 +243,7 @@ function editWorkout(workout_id)
 
             postEditBtnDiv.appendChild(postEditBtn)
             postEditBtn.addEventListener('click', () => updateWorkout(`${workout['workout_id']}`));
+            getExercises(input_exercise_name);
         })
     })
 }
@@ -266,6 +269,6 @@ function updateWorkout(workout_id)
 }
 
 // sortWorkouts();
-getExercises();
+getExercises(exerciseSelect);
 getWorkouts();
 workoutForm.addEventListener('submit', submitWorkout);
