@@ -35,7 +35,7 @@ function getExercises(select)
 function getWorkouts()
 {
     table.innerHTML = '';
-    table.innerHTML = '<thead><th>Exercise</th><th>Weight</th><th>Reps</th><th>Set #</th><th>Date</th></thead>';
+    table.innerHTML = '<thead align="center"><th>Exercise</th><th>Weight</th><th>Reps</th><th>Set #</th><th>Date</th><th>Edit</th><th>Delete</th></thead>';
     axios.get('/workouts')
     .then(res =>
     {
@@ -48,8 +48,23 @@ function getWorkouts()
             const reps = document.createElement('td');
             const set_num = document.createElement('td');
             const day = document.createElement('td');
+            const editTd = document.createElement('td');
+            const deleteTd = document.createElement('td');
+
+            //align center
+            exercise_name.style.textAlign = "center";
+            weight.style.textAlign = "center";
+            reps.style.textAlign = "center";
+            set_num.style.textAlign = "center";
+            day.style.textAlign = "center";
+            editTd.style.textAlign = "center";
+            deleteTd.style.textAlign = "center";
+
+            //buttons
             const editBtn = document.createElement('input');
             const deleteBtn = document.createElement('input');
+            editTd.appendChild(editBtn);
+            deleteTd.appendChild(deleteBtn);
 
             //add classname
             exercise_name.classList.add('workouts');
@@ -71,6 +86,10 @@ function getWorkouts()
             set_num.textContent = workouts.set_num;
             day.textContent = workouts.day;
 
+            //add classes
+            editBtn.className = 'btn'
+            deleteBtn.className = 'btn'
+
             //add functionality to buttons
             editBtn.addEventListener('click', () => editWorkout(`${workouts['workout_id']}`));
             deleteBtn.addEventListener('click', () => deleteWorkout(`${workouts['workout_id']}`));
@@ -81,8 +100,8 @@ function getWorkouts()
             row.appendChild(reps);
             row.appendChild(set_num);
             row.appendChild(day);
-            row.appendChild(editBtn);
-            row.appendChild(deleteBtn);
+            row.appendChild(editTd);
+            row.appendChild(deleteTd);
             table.appendChild(row);
         })
     })
@@ -139,7 +158,7 @@ function deleteWorkout(workout_id)
 
 function editWorkout(workout_id)
 {
-    editTable.innerHTML = '<thead><th>Exercise</th><th>Weight</th><th>Reps</th><th>Set #</th><th>Date</th></thead>';
+    editTable.innerHTML = '<thead><th >Exercise</th><th>Weight</th><th>Reps</th><th>Set #</th><th>Date</th></thead>';
     axios.get(`/workouts/${workout_id}`)
     .then(res =>
     {
