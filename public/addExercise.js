@@ -14,7 +14,7 @@ postEditBtn.value = "Post Changes"
 
 function getExercises()
 {
-    table.innerHTML = '<thead><th>Exercise</th><th>Main Muscles</th><th>Secondary Muscles</th></thead>';
+    table.innerHTML = '<thead align="center"><th>Exercise</th><th>Main Muscles</th><th>Secondary Muscles</th><th>Edit</th><th>Delete</th></thead>';
     axios.get('/exercises')
     .then(res =>
     {
@@ -25,13 +25,21 @@ function getExercises()
             const exercise_name = document.createElement('td');
             const main_muscles = document.createElement('td');
             const secondary_muscles = document.createElement('td');
+            const editTd = document.createElement('td');
+            const deleteTd = document.createElement('td');
+
+            //text align
+            exercise_name.style.textAlign = "center";
+            main_muscles.style.textAlign = "center";
+            secondary_muscles.style.textAlign = "center";
+            editTd.style.textAlign = "center";
+            deleteTd.style.textAlign = "center";
+
+            //buttons
             const editBtn = document.createElement('input');
             const deleteBtn = document.createElement('input');
-
-            //add classname
-            exercise_name.classList.add('exercises');
-            main_muscles.classList.add('exercises');
-            secondary_muscles.classList.add('exercises');
+            editTd.appendChild(editBtn);
+            deleteTd.appendChild(deleteBtn);
 
             //set buttons
             editBtn.type = 'button';
@@ -49,12 +57,16 @@ function getExercises()
             deleteBtn.addEventListener('click', () => deleteExercise(`${exercise['exercise_id']}`)
             );
 
+            //add classes
+            editBtn.className = 'btn'
+            deleteBtn.className = 'btn'
+
             //append
             row.appendChild(exercise_name);
             row.appendChild(main_muscles);
             row.appendChild(secondary_muscles);
-            row.appendChild(editBtn);
-            row.appendChild(deleteBtn);
+            row.appendChild(editTd);
+            row.appendChild(deleteTd);
             table.appendChild(row);
         })
     })
@@ -81,10 +93,12 @@ function addExercise(e)
     if(exercise_name.value.length === 0)
     {
         alert('Please enter a workout name')
+        return
     }
     else if(checkIfChecked() === false)
     {
         alert('You must select at least one main muscle worked in the exercise')
+        return
     }
 
     let primary_muscles = '';
@@ -184,6 +198,7 @@ function editExercise(exercise_id)
             editTable.appendChild(row);
 
             postEditBtnDiv.appendChild(postEditBtn)
+            postEditBtn.className = "btn btn-secondary"
             postEditBtn.addEventListener('click', () => updateExercise(`${exercise['exercise_id']}`));
             getExercises(input_exercise_name);
         })

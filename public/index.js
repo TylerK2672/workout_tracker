@@ -124,10 +124,12 @@ function submitWorkout(e)
     else if(reps.value < 0 || reps.value.length === 0)
     {
         alert('Please enter a rep amount');
+        return
     }
     else if(set_num.value < 0 || set_num.value.length === 0)
     {
         alert('Please enter a set number');
+        return
     }
 
     const d = new Date();
@@ -162,41 +164,6 @@ function editWorkout(workout_id)
     axios.get(`/workouts/${workout_id}`)
     .then(res =>
     {
-        //showing what you're editing
-        // res.data.forEach(workout =>
-        // {
-        //     const row = document.createElement('tr');
-        //     //create td's
-        //     const exercise_name = document.createElement('td');
-        //     const weight = document.createElement('td');
-        //     const reps = document.createElement('td');
-        //     const set_num = document.createElement('td');
-        //     const day = document.createElement('td');
-
-        //     //add classname
-        //     exercise_name.classList.add('workouts');
-        //     weight.classList.add('workouts');
-        //     reps.classList.add('workouts');
-        //     set_num.classList.add('workouts');
-        //     day.classList.add('workouts');
-
-        //     //set text content
-        //     exercise_name.textContent = workout.exercise_name;
-        //     weight.textContent = workout.weight;
-        //     reps.textContent = workout.reps;
-        //     set_num.textContent = workout.set_num;
-        //     day.textContent = workout.day;
-
-        //     //append onto row
-        //     row.appendChild(exercise_name);
-        //     row.appendChild(weight);
-        //     row.appendChild(reps);
-        //     row.appendChild(set_num);
-        //     row.appendChild(day);
-
-        //     editTable.appendChild(row);
-        // })
-
         //editing tables
         res.data.forEach(workout =>
         {
@@ -260,7 +227,8 @@ function editWorkout(workout_id)
 
             editTable.appendChild(row);
 
-            postEditBtnDiv.appendChild(postEditBtn)
+            postEditBtnDiv.appendChild(postEditBtn);
+            postEditBtn.className = "btn btn-secondary";
             postEditBtn.addEventListener('click', () => updateWorkout(`${workout['workout_id']}`));
             getExercises(input_exercise_name);
         })
